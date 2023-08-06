@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Pokedex</title>
+</head>
+<body>
+
+  <h1> Hola mundo </h1>
+  <form id="pokemonForm">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name"><br>
+    
+    <label for="type">Tipo:</label>
+    <input type="text" id="type" name="type"><br>
+    
+    <label for="description">Descripción:</label>
+    <textarea id="description" name="description"></textarea><br>
+    
+    <label for="hasEvolution">Tiene evolución:</label>
+    <input type="checkbox" id="hasEvolution" name="hasEvolution"><br>
+    
+    <label for="weaknesses">Debilidades (separadas por comas):</label>
+    <input type="text" id="weaknesses" name="weaknesses"><br>
+    
+    <button type="submit">Agregar Pokémon</button>
+</form>
+  <div id="pokemonList"></div>
+  <script src="./js/main.js"></script>
+</body>
+</html>

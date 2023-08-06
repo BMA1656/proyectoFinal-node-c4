@@ -1,39 +1,22 @@
 const express = require('express');
 const app = express();
-const port = 3000; 
+const port = 3000;
 const mongoose = require('mongoose');
+const path = require('path');
 
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 const dbURI = 'mongodb+srv://randyluna93:FZasa1ielX2Iknw9@cluster0.ajkai7b.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Conexión exitosa a MongoDB Atlas');
-    // Aquí puedes especificar la colección que deseas utilizar
-    const collectionName = 'pokemons';
-
-    // Obtener la referencia a la colección
-    const db = mongoose.connection;
-    const collection = db.collection(collectionName);
-
-    // Realizar operaciones con la colección
-    // Por ejemplo, obtener todos los documentos en la colección
-    collection.find({}).toArray((err, documents) => {
-      if (err) {
-        console.error('Error al obtener documentos:', err);
-      } else {
-        console.log('Documentos en la colección:', documents);
-      }
-      // Cierra la conexión de mongoose cuando hayas terminado
-      mongoose.connection.close();
-    });
-
   })
   .catch(err => {
     console.error('Error al conectar a MongoDB Atlas:', err);
   });
 
-// esquema de la colección de pokémons
 const pokemonSchema = new mongoose.Schema({
   _id: Number,
   name: String,
@@ -45,8 +28,6 @@ const pokemonSchema = new mongoose.Schema({
 
 const Pokemon = mongoose.model('Pokemon', pokemonSchema);
 
-
-// obtener todos los pokémons
 app.get('/pokemons', async (req, res) => {
   try {
     const pokemons = await Pokemon.find();
@@ -56,8 +37,16 @@ app.get('/pokemons', async (req, res) => {
   }
 });
 
-
-app.listen(port, () => {
-  console.log(`Servidor Express corriendo en http://localhost:${port}/pokemons`);
+app.post('/add-pokemon', async (req, res) => {
+  try {
+    const newPokemon = new Pokemon(req.body);
+    await newPokemon.save();
+    res.status(201).json({ message: 'Pokémon agregado exitosamente' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error al agregar el Pokémon', error: err });
+  }
 });
 
+app.listen(port, () => {
+  console.log(`Servidor Express corriendo en http://localhost:${port}`);
+});
