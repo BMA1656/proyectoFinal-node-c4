@@ -20,6 +20,8 @@ async function renderPokemons() {
     pokemonListElement.appendChild(pokemonDiv);
   });
 }
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('pokemonForm');
 
@@ -31,27 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.forEach((value, key) => {
       formDataObject[key] = value;
     });
-
-    try {
-      const response = await fetch('/add-pokemon', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formDataObject)
-      });
-
-      if (response.ok) {
-        alert('Pokémon agregado exitosamente');
-        form.reset();
-      } else {
-        const responseData = await response.json();
-        alert(`Error: ${responseData.message}`);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+   console.log(formDataObject)
   });
 });
-
-renderPokemons();

@@ -37,15 +37,7 @@ app.get('/pokemons', async (req, res) => {
   }
 });
 
-app.post('/add-pokemon', async (req, res) => {
-  try {
-    const newPokemon = new Pokemon(req.body);
-    await newPokemon.save();
-    res.status(201).json({ message: 'Pokémon agregado exitosamente' });
-  } catch (err) {
-    res.status(500).json({ message: 'Error al agregar el Pokémon', error: err });
-  }
-});
+
 
 app.listen(port, () => {
   console.log(`Servidor Express corriendo en http://localhost:${port}`);
