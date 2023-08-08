@@ -19,14 +19,14 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   });
 
 const pokemonSchema = new mongoose.Schema({
-  nombre: { type: String, required: true },
-  tipo: { type: String, required: true },
-  descripción: { type: String, required: true },
-  tieneEvolucion: { type: Boolean, required: true },
-  debilidades: { type: [String], required: true }
+  nombre: { type: String },
+  tipo: { type: String },
+  descripción: { type: String },
+  tieneEvolucion: { type: Boolean },
+  debilidades: { type: [String] }
 });
 
-const Pokemon = mongoose.model('Pokemon', pokemonSchema, 'pokemons'); // 'pokemons' es el nombre de la colección
+const Pokemon = mongoose.model('Pokemon', pokemonSchema, 'pokemons'); 
 
 app.get('/pokemons', async (req, res) => {
   try {
@@ -39,11 +39,6 @@ app.get('/pokemons', async (req, res) => {
 
 app.post('/pokemons', async (req, res) => {
   const newPokemonData = req.body;
-  
-  // Realiza validación de datos aquí, por ejemplo:
-  if (!newPokemonData.nombre || !newPokemonData.tipo || !newPokemonData.descripción) {
-    return res.status(400).json({ message: 'Faltan datos obligatorios para crear el Pokémon' });
-  }
 
   try {
     const newPokemon = await Pokemon.create(newPokemonData);
@@ -51,6 +46,37 @@ app.post('/pokemons', async (req, res) => {
   } catch (err) {
     console.error('Error al agregar el Pokémon:', err);
     res.status(500).json({ message: 'Error al agregar el pokémon', error: err.message });
+  }
+});
+
+app.put('/pokemons/:id', async (req, res) => {
+  const { id } = req.params;
+  const updatedPokemonData = req.body;
+
+  try {
+    const updatedPokemon = await Pokemon.findByIdAndUpdate(id, updatedPokemonData, { new: true });
+    if (!updatedPokemon) {
+      return res.status(404).json({ message: 'Pokémon no encontrado' });
+    }
+    res.json(updatedPokemon);
+  } catch (err) {
+    console.error('Error al actualizar el Pokémon:', err);
+    res.status(500).json({ message: 'Error al actualizar el pokémon', error: err.message });
+  }
+});
+
+app.delete('/pokemons/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedPokemon = await Pokemon.findByIdAndDelete(id);
+    if (!deletedPokemon) {
+      return res.status(404).json({ message: 'Pokémon no encontrado' });
+    }
+    res.json({ message: 'Pokémon eliminado' });
+  } catch (err) {
+    console.error('Error al eliminar el Pokémon:', err);
+    res.status(500).json({ message: 'Error al eliminar el pokémon', error: err.message });
   }
 });
 

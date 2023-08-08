@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/styles.css">
-  <title>Pokedex</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Pokedex</title>
+  </head>
+  <body>
+    <h1>Mi pokedex personal</h1>
+    <form id="pokemonForm">
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" name="name" required />
 
-  <h1> Mi pokedex personal </h1>
-  <form id="pokemonForm">
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name" required>
-    
-    <label for="type">Tipo:</label>
-    <select id="type" name="type" required>
+      <label for="type">Tipo:</label>
+      <select id="type" name="type" required>
         <option value="normal">Normal</option>
         <option value="fire">Fuego</option>
         <option value="water">Agua</option>
@@ -33,25 +32,65 @@
         <option value="dark">Siniestro</option>
         <option value="steel">Acero</option>
         <option value="fairy">Hada</option>
-    </select>
+      </select>
+
+      <label for="description">Descripción:</label>
+      <textarea id="description" name="description" required></textarea>
+
+      <label for="hasEvolution">Tiene evolución:</label>
+      <input type="checkbox" id="hasEvolution" name="hasEvolution" />
+      <label for="weaknesses">Debilidades (separadas por comas):</label>
+      <input type="text" id="weaknesses" name="weaknesses" required />
+
+      <button type="submit">Agregar Pokémon</button>
+    </form>
+
+    <div>
+      <button id="pokeListbt">see all</button>
+      <ol id="pokemonList"></ol>
+    </div>
+
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Editar Pokémon</h2>
+          <form id="editForm">
+            <label for="editName">Nombre:</label>
+            <input type="text" id="editName" name="editName" required />      
+            <label for="editType">Tipo:</label>
+            <select id="editType" name="editType" required>
+            <option value="normal">Normal</option>
+            <option value="fire">Fuego</option>
+            <option value="water">Agua</option>
+            <option value="electric">Eléctrico</option>
+            <option value="grass">Planta</option>
+            <option value="ice">Hielo</option>
+            <option value="fighting">Lucha</option>
+            <option value="poison">Veneno</option>
+            <option value="ground">Tierra</option>
+            <option value="flying">Volador</option>
+            <option value="psychic">Psíquico</option>
+            <option value="bug">Bicho</option>
+            <option value="rock">Roca</option>
+            <option value="ghost">Fantasma</option>
+            <option value="dragon">Dragón</option>
+            <option value="dark">Siniestro</option>
+            <option value="steel">Acero</option>
+            <option value="fairy">Hada</option>
+          </select>
+
+          <label for="editDescription">Descripción:</label>
+          <textarea id="editDescription" name="editDescription" required></textarea>
     
-    <label for="description" >Descripción:</label>
-    <textarea id="description" name="description" required></textarea>
+          <label for="editHasEvolution">Tiene evolución:</label>
+          <input type="checkbox" id="editHasEvolution" name="editHasEvolution" />
+          <label for="editWeaknesses">Debilidades (separadas por comas):</label>
+          <input type="text" id="editWeaknesses" name="editWeaknesses" required />
     
-    <label for="hasEvolution">Tiene evolución:</label>
-    <input type="checkbox" id="hasEvolution" name="hasEvolution">
-    <label for="weaknesses">Debilidades (separadas por comas):</label>
-    <input type="text" id="weaknesses" name="weaknesses" required>
-
-    <button type="submit">Agregar Pokémon</button>
-</form>
-
-  <div >
-    <button id="pokeListbt">see all</button>
-<ol id="pokemonList">
-
-</ol>
-  </div>
-  <script src="./js/main.js"></script>
-</body>
+          <button type="submit">Guardar cambios</button>
+        </form>
+      </div>
+    </div>
+    <script src="./js/main.js"></script>
+  </body>
 </html>

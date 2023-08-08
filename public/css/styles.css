@@ -7,7 +7,9 @@ form{
     align-items: flex-start;
 }
 
-
+#editModal{
+display: none;
+}
 #pokemonList{
     display: flex;
     flex-direction: row;
