@@ -6,3 +6,19 @@ form{
     flex-direction: column;
     align-items: flex-start;
 }
+
+
+#pokemonList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center
+}
+.pokerCard{
+    display: flex;
+    flex-direction: column;
+    border: solid grey;
+    margin: 3px;
+    width: 313px;
+    height: auto;
+}

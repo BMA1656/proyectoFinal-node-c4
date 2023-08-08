@@ -11,10 +11,10 @@
   <h1> Mi pokedex personal </h1>
   <form id="pokemonForm">
     <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name">
+    <input type="text" id="name" name="name" required>
     
     <label for="type">Tipo:</label>
-    <select id="type" name="type">
+    <select id="type" name="type" required>
         <option value="normal">Normal</option>
         <option value="fire">Fuego</option>
         <option value="water">Agua</option>
@@ -35,23 +35,23 @@
         <option value="fairy">Hada</option>
     </select>
     
-    <label for="description">Descripción:</label>
-    <textarea id="description" name="description"></textarea>
+    <label for="description" >Descripción:</label>
+    <textarea id="description" name="description" required></textarea>
     
     <label for="hasEvolution">Tiene evolución:</label>
     <input type="checkbox" id="hasEvolution" name="hasEvolution">
-    <label for="nature">Naturaleza:</label>
-    <select id="nature" name="nature">
-        <option value="hardy">Fuerte</option>
-        <option value="lonely">Solitario</option>
-        <option value="brave">Valiente</option>
-        <option value="shy">Timido</option>
-    </select>
-    
+    <label for="weaknesses">Debilidades (separadas por comas):</label>
+    <input type="text" id="weaknesses" name="weaknesses" required>
+
     <button type="submit">Agregar Pokémon</button>
 </form>
 
-  <div id="pokemonList"></div>
+  <div >
+    <button id="pokeListbt">see all</button>
+<ol id="pokemonList">
+
+</ol>
+  </div>
   <script src="./js/main.js"></script>
 </body>
 </html>

@@ -1,73 +1,76 @@
- async function getPokemons() {
+async function getPokemons() {
   const response = await fetch('/pokemons');
   const pokemons = await response.json();
   return pokemons;
 }
 
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('pokemonForm');
+document.addEventListener('DOMContentLoaded', async () => {
+  const showAllPokemons = document.getElementById("pokeListbt");
+  const formEvent = document.getElementById('pokemonForm');
   const pokemonList = document.getElementById('pokemonList');
 
-  // Función para obtener y mostrar la lista de pokémones
   const fetchPokemonList = async () => {
-    try {
-      const response = await fetch('/create');
-      if (response.ok) {
-        const pokemons = await response.json();
-        // Limpiar el contenido actual del elemento pokemonList
-        pokemonList.innerHTML = '';
+    pokemonList.innerHTML = "";
 
-        // Mostrar la lista de pokémones en pokemonList
-        pokemons.forEach(pokemon => {
-          const listItem = document.createElement('li');
-          listItem.textContent = `Nombre: ${pokemon.name}, Tipo: ${pokemon.type}, Descripción: ${pokemon.description}`;
-          pokemonList.appendChild(listItem);
-        });
-      } else {
-        console.error('Error al obtener la lista de pokémones:', response.statusText);
-      }
+    try {
+      const pokemons = await getPokemons();
+      pokemons.forEach(pokemon => {
+        let evolucion = pokemon.tieneEvolucion ? "si" : "no";
+        pokemonList.innerHTML +=
+          `
+          <li class="pokerCard" id="${pokemon._id}">
+          <p> Nombre : ${pokemon.nombre}</p>
+          <p> Tipo : ${pokemon.tipo}</p>
+          <p> Descripción : ${pokemon.descripción}</p>
+          <p> Posee Evolucion : ${evolucion}</p>
+          <p> Debilidades : ${pokemon.debilidades.join(', ')}</p>
+          </li>
+          `;
+      });
     } catch (err) {
-      console.error('Error en la comunicación con el servidor:', err);
+      console.error('Error al obtener la lista de pokémones:', err);
     }
   };
 
-  // Escuchar el evento submit del formulario
-  form.addEventListener('submit', async (event) => {
+  showAllPokemons.addEventListener('click', fetchPokemonList);
+
+  formEvent.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(form);
-    const formDataObject = {};
-    formData.forEach((value, key) => {
-      formDataObject[key] = value;
-    });
+    const formData = new FormData(formEvent);
+    const formDataObject = {
+      nombre: formData.get('name'),
+      tipo: formData.get('type'),
+      descripcion: formData.get('description'),
+      tieneEvolucion: formData.get('hasEvolution') === 'on',
+      debilidades: formData.get('weaknesses').split(','),
+    };
+    
+
+    console.log(formDataObject); 
 
     try {
-      const response = await fetch('/create', {
-        method: 'POST',
+      const response = await fetch('/pokemons', {
+        method: 'post',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formDataObject)
+        body: JSON.stringify(formDataObject),
       });
 
       if (response.ok) {
+
+        
         const newPokemon = await response.json();
-        console.log('Nuevo pokémon agregado:', newPokemon);
-        form.reset(); // Limpiar el formulario después de agregar el pokémon
-        // Obtener y mostrar la lista actualizada de pokémones
-        fetchPokemonList();
+        console.log('Nuevo Pokémon agregado:', newPokemon);
+        fetchPokemonList(); // Actualiza la lista de Pokémones
       } else {
-        console.error('Error al agregar el pokémon:', response.statusText);
+        console.error('Error al agregar el Pokémon:', response.statusText);
       }
     } catch (err) {
       console.error('Error en la comunicación con el servidor:', err);
     }
   });
 
-  // Obtener y mostrar la lista inicial de pokémones al cargar la página
   fetchPokemonList();
 });
-
