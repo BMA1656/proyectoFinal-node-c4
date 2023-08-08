@@ -37,6 +37,18 @@ app.get('/pokemons', async (req, res) => {
   }
 });
 
+// Ruta para agregar un nuevo pokémon (POST)
+app.post('/create', async (req, res) => {
+  const newPokemonData = req.body;
+
+  try {
+    // Crear un nuevo documento en la colección de pokémones
+    const newPokemon = await Pokemon.create(newPokemonData);
+    res.status(201).json(newPokemon); // 201 significa "Created"
+  } catch (err) {
+    res.status(500).json({ message: 'Error al agregar el pokémon', error: err });
+  }
+});
 
 
 app.listen(port, () => {
