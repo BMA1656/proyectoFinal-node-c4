@@ -8,25 +8,49 @@
 </head>
 <body>
 
-  <h1> Hola mundo </h1>
+  <h1> Mi pokedex personal </h1>
   <form id="pokemonForm">
     <label for="name">Nombre:</label>
-    <input type="text" id="name" name="name"><br>
+    <input type="text" id="name" name="name">
     
     <label for="type">Tipo:</label>
-    <input type="text" id="type" name="type"><br>
+    <select id="type" name="type">
+        <option value="normal">Normal</option>
+        <option value="fire">Fuego</option>
+        <option value="water">Agua</option>
+        <option value="electric">Eléctrico</option>
+        <option value="grass">Planta</option>
+        <option value="ice">Hielo</option>
+        <option value="fighting">Lucha</option>
+        <option value="poison">Veneno</option>
+        <option value="ground">Tierra</option>
+        <option value="flying">Volador</option>
+        <option value="psychic">Psíquico</option>
+        <option value="bug">Bicho</option>
+        <option value="rock">Roca</option>
+        <option value="ghost">Fantasma</option>
+        <option value="dragon">Dragón</option>
+        <option value="dark">Siniestro</option>
+        <option value="steel">Acero</option>
+        <option value="fairy">Hada</option>
+    </select>
     
     <label for="description">Descripción:</label>
-    <textarea id="description" name="description"></textarea><br>
+    <textarea id="description" name="description"></textarea>
     
     <label for="hasEvolution">Tiene evolución:</label>
-    <input type="checkbox" id="hasEvolution" name="hasEvolution"><br>
-    
-    <label for="weaknesses">Debilidades (separadas por comas):</label>
-    <input type="text" id="weaknesses" name="weaknesses"><br>
+    <input type="checkbox" id="hasEvolution" name="hasEvolution">
+    <label for="nature">Naturaleza:</label>
+    <select id="nature" name="nature">
+        <option value="hardy">Fuerte</option>
+        <option value="lonely">Solitario</option>
+        <option value="brave">Valiente</option>
+        <option value="shy">Timido</option>
+    </select>
     
     <button type="submit">Agregar Pokémon</button>
 </form>
+
   <div id="pokemonList"></div>
   <script src="./js/main.js"></script>
 </body>
