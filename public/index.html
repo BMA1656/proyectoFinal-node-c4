@@ -3,15 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css" />
     <title>Pokedex</title>
   </head>
   <body>
     <h1>Mi pokedex personal</h1>
-    <form id="pokemonForm">
+    <form id="pokemonForm" class="formPokemon">
+      <div>
       <label for="name">Nombre:</label>
       <input type="text" id="name" name="name" required />
-
+    </div>
+      <div>
       <label for="type">Tipo:</label>
       <select id="type" name="type" required>
         <option value="normal">Normal</option>
@@ -33,20 +36,29 @@
         <option value="steel">Acero</option>
         <option value="fairy">Hada</option>
       </select>
-
+    </div>
+    <div>
       <label for="description">Descripción:</label>
       <textarea id="description" name="description" required></textarea>
-
-      <label for="hasEvolution">Tiene evolución:</label>
+    </div>
+    <div>
+      <label class="container" for="hasEvolution">Tiene evolución:
       <input type="checkbox" id="hasEvolution" name="hasEvolution" />
+    
+      <div class="checkmark"></div>
+    </label>
+  </div>
+  <div>
       <label for="weaknesses">Debilidades (separadas por comas):</label>
       <input type="text" id="weaknesses" name="weaknesses" required />
-
-      <button type="submit">Agregar Pokémon</button>
+    </div>
+    
+      <button class="btn-form" type="submit">Agregar Pokémon</button>
+    
     </form>
 
     <div>
-      <button id="pokeListbt">see all</button>
+      <button class="btn-form" id="pokeListbt">see all</button>
       <ol id="pokemonList"></ol>
     </div>
 
@@ -54,7 +66,7 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <h2>Editar Pokémon</h2>
-          <form id="editForm">
+          <form id="editForm" class="formPokemon">
             <label for="editName">Nombre:</label>
             <input type="text" id="editName" name="editName" required />      
             <label for="editType">Tipo:</label>

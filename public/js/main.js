@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p> Descripción : ${pokemon.descripción}</p>
           <p> Posee Evolucion : ${evolucion}</p>
           <p> Debilidades : ${pokemon.debilidades.join(', ')}</p>
-          <button class="deleteButton" data-id="${pokemon._id}">Eliminar</button>
-          <button class="updateButton" data-pokemon='${JSON.stringify(pokemon)}'>Actualizar</button>
+          <button class="deleteButton btn-style" data-id="${pokemon._id}">Eliminar</button>
+          <button class="updateButton btn-style" data-pokemon='${JSON.stringify(pokemon)}'>Actualizar</button>
           </li>
           `;
       });
