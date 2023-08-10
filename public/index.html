@@ -9,14 +9,18 @@
   </head>
   <body>
     <h1>Mi pokedex personal</h1>
-    <form id="pokemonForm" class="formPokemon">
+    <form id="pokemonForm" class="formPokemon" action="/pokemons" enctype="multipart/form-data" method="post">
+
+
+
+    
       <div>
-      <label for="name">Nombre:</label>
-      <input type="text" id="name" name="name" required />
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
     </div>
       <div>
-      <label for="type">Tipo:</label>
-      <select id="type" name="type" required>
+      <label for="tipo">Tipo:</label>
+      <select id="tipo" name="tipo" required>
         <option value="normal">Normal</option>
         <option value="fire">Fuego</option>
         <option value="water">Agua</option>
@@ -38,20 +42,22 @@
       </select>
     </div>
     <div>
-      <label for="description">Descripción:</label>
-      <textarea id="description" name="description" required></textarea>
+      <label for="pokeInfo">pokeInfo:</label>
+      <textarea id="pokeInfo" name="pokeInfo" required></textarea>
     </div>
     <div>
-      <label class="container" for="hasEvolution">Tiene evolución:
-      <input type="checkbox" id="hasEvolution" name="hasEvolution" />
-    
-      <div class="checkmark"></div>
+      <label class="container" for="tieneEvolucion">Tiene evolución:
+      <input type="checkbox" id="tieneEvolucion" name="tieneEvolucion" value="true" />
+
+          <div class="checkmark"></div>
     </label>
   </div>
   <div>
-      <label for="weaknesses">Debilidades (separadas por comas):</label>
-      <input type="text" id="weaknesses" name="weaknesses" required />
+      <label for="debilidades">Debilidades (separadas por comas):</label>
+      <input type="text" id="debilidades" name="debilidades" required />
     </div>
+    
+    <input id="image" type="file" class="form-control-file" name="uploaded_file" accept=".jpg, .jpeg, .png">
     
       <button class="btn-form" type="submit">Agregar Pokémon</button>
     
@@ -91,13 +97,16 @@
             <option value="fairy">Hada</option>
           </select>
 
-          <label for="editDescription">Descripción:</label>
+          <label for="editDescription">pokeInfo:</label>
           <textarea id="editDescription" name="editDescription" required></textarea>
     
           <label for="editHasEvolution">Tiene evolución:</label>
           <input type="checkbox" id="editHasEvolution" name="editHasEvolution" />
           <label for="editWeaknesses">Debilidades (separadas por comas):</label>
           <input type="text" id="editWeaknesses" name="editWeaknesses" required />
+
+          <label for="image">Imagen:</label>
+          <input type="file" id="image" name="uploaded_file" accept="image/*" />
     
           <button type="submit">Guardar cambios</button>
         </form>

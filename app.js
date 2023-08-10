@@ -3,14 +3,42 @@ const app = express();
 const port = 3000;
 const mongoose = require('mongoose');
 const path = require('path');
+const upload = require('./public/js/imgControl/control');
+
 
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.post('/pokemons', upload.single('uploaded_file'), async (req, res) => {
+  const newPokemonData = req.body;
+  const image = req.file; 
+ 
+
+
+   if (image) {
+     newPokemonData.imagePath = image.filename; 
+   } else {
+     newPokemonData.imagePath = "test";
+   }
+   console.log(req.file,req.body)
+   console.log(newPokemonData.imagePath)
+     try {
+        const newPokemon = await Pokemon.create(newPokemonData);
+        res.status(201).json(newPokemon);
+      } catch (err) {
+        console.error('Error al agregar el Pokémon:', err);
+        res.status(500).json({ message: 'Error al agregar el pokémon', error: err.message });
+      }
+});
+
+
 const dbURI = 'mongodb+srv://randyluna93:FZasa1ielX2Iknw9@cluster0.ajkai7b.mongodb.net/test';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
+
+    
     console.log('Conexión exitosa a MongoDB Atlas');
     console.log('Base de datos:', result.connections[0].name);
   })
@@ -21,9 +49,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 const pokemonSchema = new mongoose.Schema({
   nombre: { type: String },
   tipo: { type: String },
-  descripción: { type: String },
+  pokeInfo: { type: String },
   tieneEvolucion: { type: Boolean },
-  debilidades: { type: [String] }
+  debilidades: { type: [String] },
+  imagePath:{ type: String }
 });
 
 const Pokemon = mongoose.model('Pokemon', pokemonSchema, 'pokemons'); 
@@ -34,18 +63,6 @@ app.get('/pokemons', async (req, res) => {
     res.json(pokemons);
   } catch (err) {
     res.status(500).json({ message: 'Error al obtener los pokémons', error: err });
-  }
-});
-
-app.post('/pokemons', async (req, res) => {
-  const newPokemonData = req.body;
-
-  try {
-    const newPokemon = await Pokemon.create(newPokemonData);
-    res.status(201).json(newPokemon);
-  } catch (err) {
-    console.error('Error al agregar el Pokémon:', err);
-    res.status(500).json({ message: 'Error al agregar el pokémon', error: err.message });
   }
 });
 
