@@ -13,10 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/pokemons', upload.single('uploaded_file'), async (req, res) => {
   const newPokemonData = req.body;
-  const image = req.file; 
- 
-
-
+  const image = req.file;
    if (image) {
      newPokemonData.imagePath = image.filename; 
    } else {

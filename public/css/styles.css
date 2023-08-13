@@ -57,7 +57,7 @@ h2{
   
 
 
-#editModal{
+#editUpdate{
 display: none;
 }
 #pokemonList{
@@ -402,4 +402,33 @@ display: none;
     background: rgb(2,29,78);
     background: linear-gradient(270deg, rgba(2, 29, 78, 0.681) 0%, rgba(31, 215, 232, 0.873) 60%);
     color: rgb(4, 4, 38);
+  }
+
+
+
+
+  .tab-container {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  .tab.active {
+    background-color: #453f3e;
+    border-bottom: 1px solid #434343;
+  }
+
+  .tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+
+  .tab-content.active {
+    display: block;
   }

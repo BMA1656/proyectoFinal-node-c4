@@ -4,6 +4,21 @@ async function getPokemons() {
   return pokemons;
 }
 
+
+function changeTab(tabIndex) {
+  const tabs = document.querySelectorAll('.tab');
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  tabContents.forEach(content => content.classList.remove('active'));
+  tabs[tabIndex - 1].classList.add('active');
+  tabContents[tabIndex - 1].classList.add('active');
+}
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', async () => {
   const showAllPokemons = document.getElementById("pokeListbt");
   const formEvent = document.getElementById('pokemonForm');
@@ -39,9 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
  formEvent.addEventListener('submit', async (event) => {
   event.preventDefault();
-
   const formData = new FormData(formEvent);
-
   const formDataObject = {
     nombre: formData.get('nombre'),
     tipo: formData.get('tipo'),
@@ -63,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (response.ok) {
       const newPokemon = await response.json();
       console.log('Nuevo Pokémon creado:', newPokemon);
-      addPokemonToList(newPokemon); // Agrega el nuevo Pokémon al DOM
+      
     } else {
       console.error('Error al crear el Pokémon:', response.statusText);
     }
@@ -71,22 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Error al crear el Pokémon:', err);
   }
 });
-  async function addPokemonToList(newPokemon) {
-    let evolucion = newPokemon.tieneEvolucion ? "si" : "no";
-    pokemonList.innerHTML +=
-      `
-      <li class="pokerCard" id="${newPokemon._id}">
-      <p> Nombre : ${newPokemon.nombre}</p>
-      <img src="${newPokemon.imagePath}" alt="">
-      <p> Tipo : ${newPokemon.tipo}</p>
-      <p> pokeInfo : ${newPokemon.pokeInfo}</p>
-      <p> Posee Evolucion : ${evolucion}</p>
-      <p> Debilidades : ${newPokemon.debilidades.join(', ')}</p>
-      <button class="deleteButton" data-id="${newPokemon._id}">Eliminar</button>
-      <button class="updateButton" data-pokemon='${JSON.stringify(newPokemon)}'>Actualizar</button>
-      </li>
-      `;
-  }
+
 
   async function deletePokemon(pokemonId) {
     try {
@@ -121,9 +119,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  const editModal = document.getElementById("editModal");
+  const editUpdate = document.getElementById("editUpdate");
   const editForm = document.getElementById("editForm");
-  const closeEditModal = document.querySelector(".close");
+  const closeeditUpdate = document.querySelector(".close");
 
   let currentPokemon = null;
 
@@ -138,7 +136,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('editHasEvolution').checked = currentPokemon.tieneEvolucion;
       document.getElementById('editWeaknesses').value = currentPokemon.debilidades.join(', ');
 
-      editModal.style.display = "block";
+      editUpdate.style.display = "block";
     }
   });
 
@@ -166,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (response.ok) {
           console.log('Pokémon actualizado');
           fetchPokemonList();
-          editModal.style.display = "none";
+          editUpdate.style.display = "none";
         } else {
           console.error('Error al actualizar el Pokémon:', response.statusText);
         }
@@ -176,10 +174,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  closeEditModal.addEventListener('click', () => {
-    editModal.style.display = "none";
+  closeeditUpdate.addEventListener('click', () => {
+    editUpdate.style.display = "none";
   });
-  
-
-  fetchPokemonList();
 });

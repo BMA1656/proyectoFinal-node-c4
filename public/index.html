@@ -7,69 +7,66 @@
     <link rel="stylesheet" href="./css/styles.css" />
     <title>Pokedex</title>
   </head>
-  <body>
-    <h1>Mi pokedex personal</h1>
-    <form id="pokemonForm" class="formPokemon" action="/pokemons" enctype="multipart/form-data" method="post">
-
-
-
-    
-      <div>
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required />
+  <body>    
+    <h1>Mi Pokedex Personal impulsada por Node</h1>
+    <div class="tab-container">
+      <div class="tab btn-form active" onclick="changeTab(1)">PokeCreador</div>
+      <div class="tab btn-form" id="pokeListbt" onclick="changeTab(2)">Pokedex</div>
     </div>
-      <div>
-      <label for="tipo">Tipo:</label>
-      <select id="tipo" name="tipo" required>
-        <option value="normal">Normal</option>
-        <option value="fire">Fuego</option>
-        <option value="water">Agua</option>
-        <option value="electric">Eléctrico</option>
-        <option value="grass">Planta</option>
-        <option value="ice">Hielo</option>
-        <option value="fighting">Lucha</option>
-        <option value="poison">Veneno</option>
-        <option value="ground">Tierra</option>
-        <option value="flying">Volador</option>
-        <option value="psychic">Psíquico</option>
-        <option value="bug">Bicho</option>
-        <option value="rock">Roca</option>
-        <option value="ghost">Fantasma</option>
-        <option value="dragon">Dragón</option>
-        <option value="dark">Siniestro</option>
-        <option value="steel">Acero</option>
-        <option value="fairy">Hada</option>
-      </select>
+    <div class="tab-content active" id="tabContent1">
+      <form id="pokemonForm" class="formPokemon" action="/pokemons" enctype="multipart/form-data" method="post">
+        <h2> Crea tu Propio Pokemon </h2>     
+         <div>
+         <label for="nombre">Nombre:</label>
+         <input type="text" id="nombre" name="nombre" required />
+       </div>
+         <div>
+         <label for="tipo">Tipo:</label>
+         <select id="tipo" name="tipo" required>
+           <option value="normal">Normal</option>
+           <option value="fire">Fuego</option>
+           <option value="water">Agua</option>
+           <option value="electric">Eléctrico</option>
+           <option value="grass">Planta</option>
+           <option value="ice">Hielo</option>
+           <option value="fighting">Lucha</option>
+           <option value="poison">Veneno</option>
+           <option value="ground">Tierra</option>
+           <option value="flying">Volador</option>
+           <option value="psychic">Psíquico</option>
+           <option value="bug">Bicho</option>
+           <option value="rock">Roca</option>
+           <option value="ghost">Fantasma</option>
+           <option value="dragon">Dragón</option>
+           <option value="dark">Siniestro</option>
+           <option value="steel">Acero</option>
+           <option value="fairy">Hada</option>
+         </select>
+       </div>
+       <div>
+         <label for="pokeInfo">pokeInfo:</label>
+         <textarea id="pokeInfo" name="pokeInfo" required></textarea>
+       </div>
+       <div>
+         <label class="container" for="tieneEvolucion">Tiene evolución:
+         <input type="checkbox" id="tieneEvolucion" name="tieneEvolucion" value="true" />
+   
+             <div class="checkmark"></div>
+       </label>
+     </div>
+     <div>
+         <label for="debilidades">Debilidades (separadas por comas):</label>
+         <input type="text" id="debilidades" name="debilidades" required />
+       </div>
+       </form>
     </div>
-    <div>
-      <label for="pokeInfo">pokeInfo:</label>
-      <textarea id="pokeInfo" name="pokeInfo" required></textarea>
+    <div class="tab-content" id="tabContent2">
+      <div>        
+        <ol id="pokemonList"></ol>
+      </div>
     </div>
-    <div>
-      <label class="container" for="tieneEvolucion">Tiene evolución:
-      <input type="checkbox" id="tieneEvolucion" name="tieneEvolucion" value="true" />
-
-          <div class="checkmark"></div>
-    </label>
-  </div>
-  <div>
-      <label for="debilidades">Debilidades (separadas por comas):</label>
-      <input type="text" id="debilidades" name="debilidades" required />
-    </div>
-    
-    <input id="image" type="file" class="form-control-file" name="uploaded_file" accept=".jpg, .jpeg, .png">
-    
-      <button class="btn-form" type="submit">Agregar Pokémon</button>
-    
-    </form>
-
-    <div>
-      <button class="btn-form" id="pokeListbt">see all</button>
-      <ol id="pokemonList"></ol>
-    </div>
-
-      <div id="editModal" class="modal">
-        <div class="modal-content">
+      <div id="editUpdate" class="update">
+        <div class="update-content">
           <span class="close">&times;</span>
           <h2>Editar Pokémon</h2>
           <form id="editForm" class="formPokemon">
@@ -96,18 +93,12 @@
             <option value="steel">Acero</option>
             <option value="fairy">Hada</option>
           </select>
-
           <label for="editDescription">pokeInfo:</label>
           <textarea id="editDescription" name="editDescription" required></textarea>
-    
           <label for="editHasEvolution">Tiene evolución:</label>
           <input type="checkbox" id="editHasEvolution" name="editHasEvolution" />
           <label for="editWeaknesses">Debilidades (separadas por comas):</label>
           <input type="text" id="editWeaknesses" name="editWeaknesses" required />
-
-          <label for="image">Imagen:</label>
-          <input type="file" id="image" name="uploaded_file" accept="image/*" />
-    
           <button type="submit">Guardar cambios</button>
         </form>
       </div>
