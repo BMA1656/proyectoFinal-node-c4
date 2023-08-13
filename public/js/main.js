@@ -4,6 +4,7 @@ async function getPokemons() {
   return pokemons;
 }
 
+const pokemonList = document.getElementById('pokemonList');
 
 function changeTab(tabIndex) {
   const tabs = document.querySelectorAll('.tab');
@@ -19,14 +20,12 @@ function changeTab(tabIndex) {
 
 
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const showAllPokemons = document.getElementById("pokeListbt");
-  const formEvent = document.getElementById('pokemonForm');
-  const pokemonList = document.getElementById('pokemonList');
 
+ 
+
+  const showAllPokemons = document.getElementById("pokeListbt"); 
   const fetchPokemonList = async () => {
     pokemonList.innerHTML = "";
-
     try {
       const pokemons = await getPokemons();
       pokemons.forEach(pokemon => {
@@ -50,8 +49,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
   showAllPokemons.addEventListener('click', fetchPokemonList);
+  
 
 
+ const formEvent = document.getElementById('pokemonForm');
  formEvent.addEventListener('submit', async (event) => {
   event.preventDefault();
   const formData = new FormData(formEvent);
@@ -142,7 +143,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   editForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-
     if (currentPokemon) {
       const editedPokemon = {
         nombre: document.getElementById('editName').value,
@@ -177,4 +177,3 @@ document.addEventListener('DOMContentLoaded', async () => {
   closeeditUpdate.addEventListener('click', () => {
     editUpdate.style.display = "none";
   });
-});
