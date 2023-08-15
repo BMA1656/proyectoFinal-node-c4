@@ -54,7 +54,6 @@ app.post('/pokemons', upload.single('uploaded_file'), async (req, res) => {
 
 
 const Pokemon = mongoose.model('Pokemon', pokemonSchema, 'pokemons'); 
-
 app.get('/pokemons', async (req, res) => {
   try {
     const pokemons = await Pokemon.find();
@@ -82,7 +81,6 @@ app.put('/pokemons/:id', async (req, res) => {
 
 app.delete('/pokemons/:id', async (req, res) => {
   const { id } = req.params;
-
   try {
     const deletedPokemon = await Pokemon.findByIdAndDelete(id);
     if (!deletedPokemon) {
