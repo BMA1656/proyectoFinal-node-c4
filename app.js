@@ -7,28 +7,8 @@ const upload = require('./public/js/imgControl/control');
 
 
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.post('/pokemons', upload.single('uploaded_file'), async (req, res) => {
-  const newPokemonData = req.body;
-  const image = req.file;
-   if (image) {
-     newPokemonData.imagePath = image.filename; 
-   } else {
-     newPokemonData.imagePath = "test";
-   }
-   console.log(req.file,req.body)
-   console.log(newPokemonData.imagePath)
-     try {
-        const newPokemon = await Pokemon.create(newPokemonData);
-        res.status(201).json(newPokemon);
-      } catch (err) {
-        console.error('Error al agregar el Pokémon:', err);
-        res.status(500).json({ message: 'Error al agregar el pokémon', error: err.message });
-      }
-});
 
 
 const dbURI = 'mongodb+srv://randyluna93:FZasa1ielX2Iknw9@cluster0.ajkai7b.mongodb.net/test';
@@ -51,6 +31,27 @@ const pokemonSchema = new mongoose.Schema({
   debilidades: { type: [String] },
   imagePath:{ type: String }
 });
+
+
+
+app.post('/pokemons', upload.single('uploaded_file'), async (req, res) => {
+  const newPokemonData = req.body;
+  const image = req.file;
+   if (image) {
+     newPokemonData.imagePath = image.filename; 
+   } else {
+     newPokemonData.imagePath = "test";
+   }
+     try {
+        const newPokemon = await Pokemon.create(newPokemonData);
+        res.status(201).json(newPokemon);
+      } catch (err) {
+        console.error('Error al agregar el Pokémon:', err);
+        res.status(500).json({ message: 'Error al agregar el pokémon', error: err.message });
+      }
+});
+
+
 
 const Pokemon = mongoose.model('Pokemon', pokemonSchema, 'pokemons'); 
 
