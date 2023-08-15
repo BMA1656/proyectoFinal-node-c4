@@ -3,6 +3,11 @@ body{
   background: linear-gradient(#212121, #212121) padding-box,
   linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
 }
+
+label{
+  display: block;
+}
+
 h1{
     color: #e81cff;
     display: flex;
@@ -39,7 +44,7 @@ h2{
     background: linear-gradient(#212121, #212121) padding-box,
                 linear-gradient(355deg, transparent 25%,#e81cff, #40c9ff) border-box;
     border: 2px solid transparent;
-    padding: 32px 24px;
+    padding: 15px 97px;
     font-size: 14px;
     font-family: inherit;
     color: white;
@@ -211,8 +216,6 @@ display: none;
     box-shadow: 2px 2px 15px #8707ff inset;
    }
 
-   #weaknesses
-
    #weaknesses{
     color: #8707ff;
     border: 2px solid #8707ff;
@@ -251,7 +254,7 @@ display: none;
    }
    
    .container {
-    display: block;
+    display: flex;
     position: relative;
     cursor: pointer;
     font-size: 20px;
@@ -431,4 +434,60 @@ display: none;
 
   .tab-content.active {
     display: block;
+  }
+
+
+  .form-style{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+    color: white;
+  }
+  
+  .form-style .label-style {
+    font-size: 15px;
+    padding-left: 10px;
+    position: absolute;
+    top: 13px;
+    transition: 0.3s;
+    pointer-events: none;
+  }
+  
+  .input-style {
+    width: 200px;
+    height: 45px;
+    border: none;
+    outline: none;
+    padding: 0px 7px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 15px;
+    background-color: transparent;
+    box-shadow: 3px 3px 10px rgba(0,0,0,1),
+    -1px -1px 6px rgba(255, 255, 255, 0.4);
+  }
+  
+  .input-style:focus {
+    border: 2px solid transparent;
+    color: #fff;
+    box-shadow: 3px 3px 10px rgba(0,0,0,1),
+    -1px -1px 6px rgba(255, 255, 255, 0.4),
+    inset 3px 3px 10px rgba(0,0,0,1),
+    inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+  }
+  
+  .form-style .input-style:valid ~ .label-style,
+  .form-style .input-style:focus ~ .label-style {
+    transition: 0.3s;
+    padding-left: 2px;
+    transform: translateY(-35px);
+  }
+  
+  .form-style .input-style:valid,
+  .form-style .input-style:focus {
+    box-shadow: 3px 3px 10px rgba(0,0,0,1),
+    -1px -1px 6px rgba(255, 255, 255, 0.4),
+    inset 3px 3px 10px rgba(0,0,0,1),
+    inset -1px -1px 6px rgba(255, 255, 255, 0.4);
   }

@@ -40,7 +40,7 @@ function changeTab(tabIndex) {
           <p> Posee Evolucion : ${evolucion}</p>
           <p> Debilidades : ${pokemon.debilidades.join(', ')}</p>
           <button class="deleteButton btn-style" data-id="${pokemon._id}">Eliminar</button>
-          <button class="updateButton btn-style" data-pokemon='${JSON.stringify(pokemon)}'>Actualizar</button>
+          <button class="updateButton btn-style" data-pokemon='${JSON.stringify(pokemon)}'>Editar</button>
           </li>
           `;
       });
